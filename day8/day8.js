@@ -5,8 +5,8 @@ const fs = require('fs');
 
 console.log('------------------ DAY 8 ---------------');
 console.log('........................................');
-const data = fs.readFileSync('./day8/input.txt', 'utf8');
-// const data = fs.readFileSync('./day8/inputTest.txt', 'utf8');  //test data
+// const data = fs.readFileSync('./day8/input.txt', 'utf8');
+const data = fs.readFileSync('./day8/inputTest.txt', 'utf8');  //test data
 const string = data.toString();
 const _arr = string.split('\n')
 
@@ -40,8 +40,6 @@ while ( row < arr.length) {
       if ( rowCheck || colCheck ) addTree(row, col)
     }
 
-    
-    
     col ++
   }
   col = 0;
@@ -119,3 +117,126 @@ function addTree(row, col){
 
 console.log('------------------ PART 1 ---------------');
 console.log(trees)
+
+
+
+
+///////////////
+//////// PART 2
+///////////////
+row = 0;
+col = 0
+let max = 0;
+while ( row < arr.length) {
+
+  while ( col < arr[row].length ) {
+    const scenicScoreArr = [];
+
+
+    const val = arr[row][col];
+    checkRow2(row, col, val, scenicScoreArr);
+    checkCol2(row, col, val, scenicScoreArr);
+    // if ( rowCheck || colCheck ) addTree(row, col)
+    console.log(row, col, val)
+    console.log(scenicScoreArr)
+    const total = scenicScoreArr.reduce( (p,c) => p * c, 1)
+    console.log(total)
+    // console.log(scenicScoreArr)
+    if (total > max) max = total;
+    
+
+    col ++
+  }
+  col = 0;
+
+
+  row ++;
+}
+
+
+function checkRow2(row, col, val, scenicScoreArr) {
+  let r= row;
+  let c= col-1;
+  let count = 1;
+  let run = true;
+  while( c >= 0 && run ) {
+    
+    const checkVal = arr[row][c];
+    if (checkVal >= val) {
+      // reverse = false;
+      // return
+      run = false;
+      break;
+    }
+    else {
+      count ++;
+    }
+    c --;
+  }
+  scenicScoreArr.push(count)
+
+  count = 1;
+  c = col+1;
+  run = true;
+  while ( c < arr[row].length && run ) {
+    const checkVal = arr[row][c];
+    if (checkVal >= val) {
+      // forward = false;
+      // return;
+      run = false;
+      break;
+    }
+    else {
+      count ++;
+    }
+    c ++;
+  }
+
+  scenicScoreArr.push(count)
+}
+
+function checkCol2(row, col, val, scenicScoreArr) {
+
+  let r = row-1;
+  let c = col;
+  let count = 1;
+  let run = true;
+  while (r >= 0 && run) {
+    const checkVal = arr[r][col];
+    if (checkVal >= val) {
+      // reverse = false;
+      // return;
+      run = false
+      break;
+    }
+    else {
+      count ++
+    }
+    r--
+  }
+  scenicScoreArr.push(count);
+
+  count = 1;
+  r = row+1;
+  run = true
+  while (r < arr.length && run ) {
+    const checkVal = arr[r][col];
+    if (checkVal >= val) {
+      // forward = false;
+      // return;
+      run = false;
+      break;
+    }
+    else {
+      count++
+    }
+    r++;
+  }
+  
+
+  scenicScoreArr.push(count)
+
+}
+
+console.log('-----------------  --------------------------');
+console.log(max)
