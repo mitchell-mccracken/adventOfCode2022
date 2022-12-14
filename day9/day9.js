@@ -5,8 +5,8 @@ const fs = require('fs');
 
 console.log('------------------ DAY 9 ---------------');
 console.log('........................................');
-const data = fs.readFileSync('./day9/input.txt', 'utf8');
-// const data = fs.readFileSync('./day9/inputTest.txt', 'utf8');  //test data
+// const data = fs.readFileSync('./day9/input.txt', 'utf8');
+const data = fs.readFileSync('./day9/inputTest.txt', 'utf8');  //test data
 // const data = fs.readFileSync('./day9/inputTest2.txt', 'utf8');  //test data
 const string = data.toString();
 const arr = string.split('\n')
@@ -179,8 +179,8 @@ function checkTail2(h, t, dir) {
   const deltaCol = Math.abs( h[1] - t[1] );
 
   if ( deltaCol > 1 ){
-    // if ( deltaRow === 0 ) t[1] += dir 
-    if ( deltaRow === 0 ) t[1] += (h[1]-t[1]) ;
+    if ( deltaRow === 0 ) t[1] += dir 
+    // if ( deltaRow === 0 ) t[1] += (h[1]-t[1]) ;
     else {
       // t[1] += dir;
       t[1] += (h[1]-t[1])
@@ -189,8 +189,8 @@ function checkTail2(h, t, dir) {
   }
 
   else if ( deltaRow > 1){
-    // if ( deltaCol === 0 ) t[0] += dir;
-    if ( deltaCol === 0 ) t[0] += (h[0]-t[0]);
+    if ( deltaCol === 0 ) t[0] += dir;
+    // if ( deltaCol === 0 ) t[0] += (h[0]-t[0]);
     else {
       t[1] = h[1]
       // t[0] +=dir
@@ -199,7 +199,7 @@ function checkTail2(h, t, dir) {
   }
 
   // console.log(t)
-  set.add(`${t[0]}-${t[1]}`);
+  // set.add(`${t[0]}-${t[1]}`);
 }
 
 function loop(dir) {
@@ -216,3 +216,4 @@ const part2 = Array.from(part2Set).length;
 console.log('------------------ PART 2 ---------------');
 console.log(part2)
 // 2480 too low
+// 3824 too high
